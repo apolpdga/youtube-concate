@@ -9,7 +9,7 @@ from youtube_concate.pipeline.steps.step import Step
 from youtube_concate.settings import YOUTUBE_API_KEY
 
 class GetVideoList(Step):
-    def process(self, inputs):
+    def process(self, data, inputs):
         channel_id = inputs['channel_id']
         base_video_url = 'https://www.youtube.com/watch?v='
         base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
