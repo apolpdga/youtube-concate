@@ -9,7 +9,7 @@ from youtube_concate.pipeline.steps.step import Step
 from youtube_concate.settings import YOUTUBE_API_KEY
 
 class GetVideoList(Step):
-    def process(self, data, inputs):
+    def process(self, data, inputs, utils):
         channel_id = inputs['channel_id']
         base_video_url = 'https://www.youtube.com/watch?v='
         base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
@@ -30,7 +30,10 @@ class GetVideoList(Step):
             try:
                 next_page_token = resp['nextPageToken']
                 url = first_url + '&pageToken={}'.format(next_page_token)
+
             except KeyError:
+                break
+            if(len(video_links) > 10):
                 break
         print(len(video_links))
         return video_links
